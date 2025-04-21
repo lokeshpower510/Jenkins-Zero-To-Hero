@@ -2,7 +2,12 @@ pipeline {
   agent {
     docker {
       image 'maven:3.9.5-eclipse-temurin-17'
-     // image "lokeshpower510/maven-docker-agent:v1"
+      sh '''
+  apt-get update
+  apt-get install -y docker.io
+  docker --version
+'''
+
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
